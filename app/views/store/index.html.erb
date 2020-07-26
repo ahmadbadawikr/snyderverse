@@ -1,12 +1,11 @@
 <% if notice %>
 <aside id="notice"><%= notice %></aside>
 <% end %>
-
-<h1>DC Cinematic Snyderverse</h1>
+<h1>Your Pragmatic Catalog</h1>
 <ul class="catalog">
     <% cache @products do %>
         <% @products.each do |product| %>
-            <% cache @products do %>
+            <% cache product do %>
                 <li>
                     <%= image_tag(product.image_url) %>
                     <h2><%= product.title %></h2>
@@ -15,6 +14,9 @@
                     </p>
                     <div class="price">
                         <%= number_to_currency(product.price) %>
+                        <br>
+                        <br>
+                            <%= button_to 'Add to Cart', line_items_path(product_id: product) %>
                     </div>
                 </li>
             <% end %>
